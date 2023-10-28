@@ -1,0 +1,93 @@
+body {
+    background-color: black;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+}
+.box {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+}
+h2 {
+    text-align: center;
+    color: aliceblue;
+}
+.container>h1 {
+    text-align: center;
+    font-weight: 900;
+    font-size: 60px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+    color: aliceblue;
+}
+#start-btn {
+    margin-inline: auto;
+    background-color: rgb(7, 254, 7);
+    padding-block: 1.5rem;
+    padding-inline: 2rem;
+    font-size: 30px;
+    font-weight: 700;
+    border-radius: 2rem;
+    border: solid 0.2rem rgb(7, 254, 7);
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+}
+.game-box {
+    height: 400px;
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+}
+#box1, #box2, #box3, #box4 {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    border-radius: 10px;
+}
+#box1:hover, #box2:hover, #box3:hover, #box4:hover {
+    cursor: pointer;
+}
+#box1 {
+    left: 75px;
+    top: 75px;
+    background-color: chartreuse;
+}
+#box2 {
+    left: 125px;
+    top: 75px;
+    background-color: aqua;
+}
+#box3 {
+    left: -125px;
+    top: 225px;
+    background-color: coral;
+}
+#box4 {
+    left: -75px;
+    top: 225px;
+    background-color: darkgoldenrod;
+}
+@keyframes blink {
+    0% {
+        
+    }
+    100% {
+        background-color: white;
+    }
+}
+@keyframes won {
+    0% {
+        
+    }
+    100% {
+        background-color: rgb(81, 255, 81);
+    }
+}
+@keyframes loss {
+    0% {
+        
+    }
+    100% {
+        background-color: rgb(246, 31, 31);
+    }
+}
