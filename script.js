@@ -1,136 +1,119 @@
-let startBtn = document.querySelector('#start-btn');
-let box1 = document.querySelector('#box1');
-let box2 = document.querySelector('#box2');
-let box3 = document.querySelector('#box3');
-let box4 = document.querySelector('#box4');
+let levelDisplay = document.querySelector('#level-display');
+let scoreDisplay = document.querySelector('#score-display');
+let colors = document.querySelectorAll('.colors');
+let gameCount = false;
+let startBtn = document.querySelector('#btn');
 let body = document.querySelector('body');
-let h2 = document.querySelector('h2');
 
-let inGameArraySeq = [];
-let userArraySeq = [];
+let blueColor = document.querySelector('#blue');
+let greenColor = document.querySelector('#green');
+let yellowColor = document.querySelector('#yellow');
+let redColor = document.querySelector('#red');
 
+for(let color of colors) {
+    color.setAttribute('disabled',true);
+}
 
+let userArray = [];
+let gameArray = [];
 
-let flash = function () {
-    startBtn.disabled = true;
-    h2.innerText = "Let's Start the game !!"
-    let x = Math.floor(Math.random()*4+1);
-    if(x == 1) {
-        box1.style.animation='blink 0.2s ease alternate';
-        inGameArraySeq.push(`${x}`);
-    } else if(x == 2) {
-        box2.style.animation='blink 0.2s ease alternate';
-        inGameArraySeq.push(`${x}`);
-    } else if(x == 3) {
-        box3.style.animation='blink 0.2s ease alternate';
-        inGameArraySeq.push(`${x}`);
-    } else if(x == 4) {
-        box4.style.animation='blink 0.2s ease alternate';
-        inGameArraySeq.push(`${x}`);
+let levelCount = 0;
+
+function gameOver() {
+    gameCount = false;
+    startBtn.removeAttribute('disabled');
+    startBtn.innerHTML = 'Retry!';
+    gameArray = [];
+    userArray = [];
+    levelCount = 0;
+    for(let color of colors) {
+        color.setAttribute('disabled',true);
     }
-    let count;
-    let userFun1 = function () {
-        count = 1;
-        userArraySeq.push(`${count}`);
-        console.log(userArraySeq);
-        box1.disabled = true;
-        box2.disabled = true;
-        box3.disabled = true;
-        box4.disabled = true;
-        if(userArraySeq[0] == inGameArraySeq[0]) {
-            body.style.animation = 'won 0.1s ease';
-            setTimeout(()=>{
-                h2.innerText = "Congratulations!! You Won the Game..!";
-            },500);
-        } else {
-            body.style.animation = 'loss 0.1s ease';
-            setTimeout(()=>{
-                h2.innerText = "Better Luck Next Time..!!";
-            },500);
+}
+
+function gameStarted() {
+    if(gameCount == false) {
+        gameCount = true;
+        startBtn.setAttribute('disabled',true);
+        colorBlink();
+        for(let color of colors) {
+            color.removeAttribute('disabled');
         }
     }
-    let userFun2 = function () {
-        count = 2;
-        userArraySeq.push(`${count}`);
-        console.log(userArraySeq);
-        box1.disabled = true;
-        box2.disabled = true;
-        box3.disabled = true;
-        box4.disabled = true;
-        if(userArraySeq[0] == inGameArraySeq[0]) {
-            body.style.animation = 'won 0.1s ease';
-            setTimeout(()=>{
-                h2.innerText = "Congratulations!! You Won the Game..!";
-            },500);
+}
+
+function colorBlink() {
+    userArray = [];
+    levelCount++;
+    levelDisplay.innerHTML = `Level ${levelCount}`;
+    scoreDisplay.innerHTML = `Your score is ${levelCount-1}`;
+    let colorBoxBlinking = (colorName) => {
+        for(let color of colors) {
+            if(color.id == colorName) {
+                setTimeout(() => {
+                    color.style.backgroundColor = 'white';
+                }, 300);
+                setTimeout(() => {    
+                    color.style.backgroundColor = `${colorName}`;
+                }, 700);
+            }
+        }
+    };
+    let randomNumber = Math.floor(Math.random()*4) + 1;
+    switch(randomNumber) {
+        case 1:
+            let colorBlue = 'blue';
+            colorBoxBlinking(colorBlue);
+            gameArray.push(colorBlue);
+            break;
+        case 2:
+            let colorGreen = 'green';
+            colorBoxBlinking(colorGreen);
+            gameArray.push(colorGreen);
+            break;
+        case 3:
+            let colorRed = 'red';
+            colorBoxBlinking(colorRed);
+            gameArray.push(colorRed);
+            break;
+        case 4:
+            let colorYellow = 'yellow';
+            colorBoxBlinking(colorYellow);
+            gameArray.push(colorYellow);
+            break;
+    }
+}
+
+function userFun(color) {
+    userArray.push(`${color.id}`);
+    for(let i=0; i<userArray.length; i++) {
+        if(userArray[i] == gameArray[i]) {
+            if(userArray.length == gameArray.length) {
+                console.log('well done!');
+                setTimeout(() => {
+                    body.style.backgroundColor = 'rgb(2, 191, 2)';
+                }, 300);
+                setTimeout(() => {    
+                    body.style.backgroundColor = `beige`;
+                }, 700);
+                colorBlink();
+            }
         } else {
-            body.style.animation = 'loss 0.1s ease';
-            setTimeout(()=>{
-                h2.innerText = "Better Luck Next Time..!!";
-            },500);
+            gameOver();
+            setTimeout(() => {
+                body.style.backgroundColor = 'red';
+            }, 300);
+            setTimeout(() => {    
+                body.style.backgroundColor = `beige`;
+            }, 700);
         }
     }
-    let userFun3 = function () {
-        count = 3;
-        userArraySeq.push(`${count}`);
-        console.log(userArraySeq);
-        box1.disabled = true;
-        box2.disabled = true;
-        box3.disabled = true;
-        box4.disabled = true;
-        if(userArraySeq[0] == inGameArraySeq[0]) {
-            setTimeout(()=>{
-                h2.innerText = "Congratulations!! You Won the Game..!";
-            },500);
-            body.style.animation = 'won 0.1s ease';
-        } else {
-            body.style.animation = 'loss 0.1s ease';
-            setTimeout(()=>{
-                h2.innerText = "Better Luck Next Time..!!";
-            },500);
-        }
-    }
-    let userFun4 = function () {
-        count = 4;
-        userArraySeq.push(`${count}`);
-        console.log(userArraySeq);
-        box1.disabled = true;
-        box2.disabled = true;
-        box3.disabled = true;
-        box4.disabled = true;
-        if(userArraySeq[0] == inGameArraySeq[0]) {
-            body.style.animation = 'won 0.1s ease';
-            setTimeout(()=>{
-                h2.innerText = "Congratulations!! You Won the Game..!";
-            },500);
-        } else {
-            body.style.animation = 'loss 0.1s ease';
-            setTimeout(()=>{
-                h2.innerText = "Better Luck Next Time..!!";
-            },500);
-        }
-    }
-    box1.addEventListener('click',userFun1);
-    box2.addEventListener('click',userFun2);
-    box3.addEventListener('click',userFun3);
-    box4.addEventListener('click',userFun4);
-    console.log(inGameArraySeq);
-};
+}
 
-console.dir(startBtn);
-startBtn.addEventListener('mousedown', function () {
-    startBtn.style.transform = "scale(1.1)";
+colors.forEach(color => {
+    color.addEventListener('click',()=>{
+        userFun(color);
+    });
 });
 
-startBtn.addEventListener('mouseup', function () {
-    startBtn.style.transform = "scale(1)";
-});
-
-startBtn.addEventListener('mouseleave', function () {
-    startBtn.style.transform = "scale(1)";
-});
-
-startBtn.addEventListener('mousemove', function () {
-    startBtn.style.cursor = "pointer";
-});
-
-startBtn.addEventListener('click',flash);
+startBtn.addEventListener('click',gameStarted);
