@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simon Game</title>
+    <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>SIMON GAME</h1>
-        <h2>Press 'START' Button to start the game...!</h2>
-        <div class="box">
-            <div class="game-box">
-                <button id="box1"></button>
-                <button id="box2"></button>
-                <button id="box3"></button>
-                <button id="box4"></button>
-            </div>
-            <button id="start-btn">START</button>
-        </div>
+    <h1>Simon Game</h1>
+    <p id="level-display">Press the start button to start the game</p>
+    <h2 id="score-display"></h2>
+    <div class="colors-container">
+        <button class="colors" id="blue"></button>
+        <button class="colors" id="green"></button>
+        <button class="colors" id="red"></button>
+        <button class="colors" id="yellow"></button>
     </div>
+    <button id="btn">Start</button>
+
     <script src="script.js"></script>
 </body>
 </html>
