@@ -23,6 +23,7 @@ function gameOver() {
     gameCount = false;
     startBtn.removeAttribute('disabled');
     startBtn.innerHTML = 'Retry!';
+    levelDisplay.innerHTML = 'Game Over...!'
     gameArray = [];
     userArray = [];
     levelCount = 0;
