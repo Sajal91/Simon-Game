@@ -86,33 +86,32 @@ function colorBlink() {
 }
 
 function userFun(color) {
-    userArray.push(`${color.id}`);
-    for(let i=0; i<userArray.length; i++) {
-        if(userArray[i] == gameArray[i]) {
-            if(userArray.length == gameArray.length) {
-                console.log('well done!');
-                setTimeout(() => {
-                    body.style.backgroundColor = 'rgb(2, 191, 2)';
-                }, 300);
-                setTimeout(() => {    
-                    body.style.backgroundColor = `beige`;
-                }, 700);
-                colorBlink();
-            }
-        } else {
-            gameOver();
-            setTimeout(() => {
-                body.style.backgroundColor = 'red';
-            }, 300);
-            setTimeout(() => {    
-                body.style.backgroundColor = `beige`;
-            }, 700);
+    userArray.push(color.id);
+    console.log('user array', userArray);
+    console.log('game array', gameArray);
+
+    if (userArray.every((val, index) => val === gameArray[index])) {
+        if (userArray.length === gameArray.length) {
+            console.log('Well done!');
+            colorBlink();
         }
+    } else {
+        gameOver();
+        setTimeout(() => {
+            body.style.backgroundColor = 'red';
+        }, 300);
+        setTimeout(() => {
+            body.style.backgroundColor = 'beige';
+        }, 700);
     }
 }
 
 colors.forEach(color => {
     color.addEventListener('click',()=>{
+        color.style.boxShadow = '0.5rem 0.5rem 0.5rem black';
+        setTimeout(() => {
+            color.style.boxShadow = '0.7rem 0.7rem 1rem black';
+        }, 400);
         userFun(color);
     });
 });
