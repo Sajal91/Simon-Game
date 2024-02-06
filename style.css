@@ -37,7 +37,6 @@ h1 {
     width: 10rem;
     border: solid 0.4rem black;
     border-radius: 2rem;
-    /* animation: blink 1s ease alternate; */
     box-shadow: 0.7rem 0.7rem 1rem black;
 }
 
